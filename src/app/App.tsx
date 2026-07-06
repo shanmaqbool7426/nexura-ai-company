@@ -11,6 +11,15 @@ import confetti from "canvas-confetti";
 import robotHand from "../assets/robot_hand.png";
 import brainHologram from "../assets/brain_hologram.png";
 import aiCube from "../assets/ai_cube.jpg";
+import knowledgeAiRag from "../assets/projects/knowledge-ai-rag.jpg";
+import leafLensPlantCare from "../assets/projects/leaflens-plant-care.jpg";
+import quranAi from "../assets/projects/quran-ai.jpg";
+import mamaVerseAi from "../assets/projects/mamaverse-ai.jpg";
+import glowAi from "../assets/projects/glow-ai.jpg";
+import pathPilotAi from "../assets/projects/pathpilot-ai.jpg";
+import homeWorkout from "../assets/projects/home-workout.jpg";
+import sunhubMarketplace from "../assets/projects/sunhub-marketplace.jpg";
+import aussieMotorMarketplace from "../assets/projects/aussiemotor-marketplace.png";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 const LIME = "#B9FF29";
@@ -862,45 +871,103 @@ const TechStack = () => {
 // ─── Products / Projects (dark) ────────────────────────────────────────────────
 const projectsList = [
   {
-    tag:"HealthTech",
-    title:"MediFlow Patient Portal",
-    desc:"HIPAA-compliant custom medical record portals, telemedicine video routing, and EHR synchronization pipelines.",
-    img:"https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=320&fit=crop&auto=format",
-    glow:"rgba(185,255,41,.12)",
+    tag:"Primary Project",
+    title:"Sunhub Solar Marketplace",
+    desc:"Solar marketplace platform connecting buyers, dealers, and suppliers with product discovery, trader deals, category shopping, pickup maps, supplier ads, reviews, and articles.",
+    img:sunhubMarketplace,
+    glow:"rgba(249,115,22,.18)",
+    accent:"#FF6A00",
+    metrics:["Solar Marketplace", "Supplier Network", "Live Deals"],
+    stack:["Next.js", "TypeScript", "Node.js"],
+    primary:true,
   },
   {
-    tag:"Fintech",
-    title:"PaySphere Transaction System",
-    desc:"Secure PCI-DSS compliant credit lending dashboards, multi-currency processing networks, and automated risk reporting.",
-    img:"https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&h=320&fit=crop&auto=format",
-    glow:"rgba(0,210,255,.1)",
+    tag:"Primary Project",
+    title:"AussieMotor Marketplace",
+    desc:"Full-stack automotive marketplace built with the MERN stack, featuring advanced vehicle search, dealer listings, responsive layouts, seller management, and secure REST APIs.",
+    img:aussieMotorMarketplace,
+    glow:"rgba(59,130,246,.18)",
+    accent:"#38BDF8",
+    metrics:["MERN Stack", "Dealer Portal", "Responsive UX"],
+    stack:["MongoDB", "Express.js", "React.js", "Node.js"],
+    primary:true,
   },
   {
-    tag:"E-Commerce",
-    title:"CartX Headless Marketplace",
-    desc:"Ultra-fast storefronts using Next.js headless checkout hooks, complex ERP inventory synchronizers, and analytics.",
-    img:"https://images.unsplash.com/photo-1655720828018-edd2daec9349?w=600&h=320&fit=crop&auto=format",
-    glow:"rgba(74,222,128,.1)",
+    tag:"Enterprise AI",
+    title:"KnowledgeAI RAG Assistant",
+    desc:"Document intelligence platform with Chroma Cloud ingestion, source citations, and finance-report Q&A powered by agent workflows.",
+    img:knowledgeAiRag,
+    glow:"rgba(139,92,246,.18)",
+    accent:"#8B5CF6",
+  },
+  {
+    tag:"Mobile App",
+    title:"LeafLens Plant Care",
+    desc:"Plant identification and care companion with disease diagnosis, reminders, toxicity checks, garden tracking, and expert chat flows.",
+    img:leafLensPlantCare,
+    glow:"rgba(34,197,94,.16)",
+    accent:"#22C55E",
+  },
+  {
+    tag:"Islamic App",
+    title:"Quran AI Learn & Recite",
+    desc:"Quran learning app concept with reading goals, recitation, translation, tafsir, search, bookmarks, and an AI Islamic scholar assistant.",
+    img:quranAi,
+    fit:"contain",
+    glow:"rgba(234,179,8,.16)",
+    accent:"#EAB308",
+  },
+  {
+    tag:"FemTech",
+    title:"MamaVerse AI",
+    desc:"Pregnancy and baby-care companion with AI copilot chat, 3D baby growth, health tracking, meal planning, and reminders.",
+    img:mamaVerseAi,
+    glow:"rgba(236,72,153,.18)",
+    accent:"#EC4899",
+  },
+  {
+    tag:"Beauty AI",
+    title:"GlowAI Skin Partner",
+    desc:"AI skin analysis app with camera scanning, issue heatmaps, skincare routines, product recommendations, progress, and premium plans.",
+    img:glowAi,
+    glow:"rgba(168,85,247,.16)",
+    accent:"#A855F7",
   },
   {
     tag:"EdTech",
-    title:"EduLearn Global LMS",
-    desc:"Scalable video hosting and streaming networks, gamified course pipelines, and student assessment algorithms.",
-    img:"https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=600&h=320&fit=crop&auto=format",
-    glow:"rgba(251,146,60,.08)",
+    title:"PathPilot AI",
+    desc:"Career and business roadmap app that generates learning paths, daily tasks, mentor chat, evaluations, analytics, and achievements.",
+    img:pathPilotAi,
+    glow:"rgba(16,185,129,.14)",
+    accent:"#10B981",
+  },
+  {
+    tag:"Fitness App",
+    title:"Home Workout",
+    desc:"No-equipment workout experience with plans, timers, exercise library, progress analytics, muscle focus, and goal tracking.",
+    img:homeWorkout,
+    glow:"rgba(245,158,11,.16)",
+    accent:"#F59E0B",
   },
 ];
 
 const Projects = () => (
-  <section className="py-24" style={{ background:"#0C0C12" }}>
-    <div className="max-w-7xl mx-auto px-6">
+  <section id="projects" className="py-28 relative overflow-hidden" style={{ background:"#0C0C12" }}>
+    <div className="absolute inset-0 pointer-events-none" style={{
+      backgroundImage:"radial-gradient(circle at 20% 5%, rgba(185,255,41,.10), transparent 30%), radial-gradient(circle at 82% 18%, rgba(56,189,248,.12), transparent 28%), linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px)",
+      backgroundSize:"auto, auto, 64px 64px, 64px 64px"
+    }} />
+    <div className="relative max-w-7xl mx-auto px-6">
       <motion.div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12"
         initial={{ opacity:0, y:24 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:.6 }}>
-        <div>
-          <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color:LIME }}>// Case Studies</p>
+        <div className="max-w-2xl">
+          <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color:LIME }}>// Flagship Work</p>
           <h2 className="text-4xl lg:text-5xl font-black text-white tracking-tight">
-            Featured Projects &amp; Work
+            Product builds with launch-ready polish
           </h2>
+          <p className="text-sm text-gray-400 leading-relaxed mt-4 max-w-xl">
+            Primary marketplace platforms first, followed by AI apps and product systems shaped for real users, clean flows, and investor-grade presentation.
+          </p>
         </div>
         <a href="#contact" className="inline-flex items-center gap-1.5 text-sm font-semibold text-gray-400 hover:text-white mt-4 md:mt-0 transition-colors">
           Start Your Case Study <ChevronRight className="w-4 h-4"/>
@@ -909,27 +976,69 @@ const Projects = () => (
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {projectsList.map((p,i)=>(
-          <motion.div key={p.title} className="dark-card rounded-2xl overflow-hidden cursor-default flex flex-col justify-between"
+          <motion.div key={p.title}
+            className={`group relative overflow-hidden cursor-default flex flex-col justify-between rounded-2xl ${p.primary ? "lg:col-span-2 min-h-[520px]" : "dark-card"}`}
+            style={p.primary ? {
+              background:`linear-gradient(145deg, rgba(255,255,255,.10), rgba(255,255,255,.035) 42%, rgba(9,9,13,.96)), ${CARD}`,
+              border:`1px solid ${p.accent}55`,
+              boxShadow:`0 24px 80px ${p.accent}20, inset 0 1px 0 rgba(255,255,255,.12)`
+            } : undefined}
             initial={{ opacity:0, y:24 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }}
-            transition={{ duration:.5, delay:i*.08 }}>
+            transition={{ duration:.5, delay:i*.08 }}
+            whileHover={{ y:-6 }}>
+            {p.primary && (
+              <>
+                <div className="absolute -top-28 -right-24 w-64 h-64 rounded-full opacity-20 blur-3xl pointer-events-none" style={{ background:p.accent }} />
+                <div className="absolute inset-x-0 top-0 h-px pointer-events-none" style={{ background:`linear-gradient(90deg, transparent, ${p.accent}, transparent)` }} />
+              </>
+            )}
             {/* Image */}
             <div>
-              <div className="relative h-40 overflow-hidden">
-                <img src={p.img} alt={p.title} className="w-full h-full object-cover" />
-                <div className="absolute inset-0" style={{ background:`linear-gradient(to bottom, transparent 40%, ${CARD})` }} />
+              <div className={`relative overflow-hidden ${p.primary ? "h-72 m-3 rounded-xl border border-white/10" : "h-48"}`} style={{ background:"#09090D" }}>
+                <img
+                  src={p.img}
+                  alt={p.title}
+                  className="w-full h-full transition-transform duration-700 group-hover:scale-[1.04]"
+                  style={{ objectFit:p.fit ?? "cover", objectPosition:"center top" }}
+                />
+                <div className="absolute inset-0" style={{ background:p.primary ? `linear-gradient(to bottom, transparent 28%, rgba(9,9,13,.22) 56%, ${CARD} 100%)` : `linear-gradient(to bottom, transparent 40%, ${CARD})` }} />
                 <div className="absolute inset-0" style={{ background:p.glow }} />
-                <span className="absolute top-3 left-3 text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full"
-                  style={{ background:"rgba(185,255,41,.15)", color:LIME }}>{p.tag}</span>
+                {p.primary && (
+                  <div className="absolute top-3 right-3 flex items-center gap-1 rounded-full px-2.5 py-1 text-[9px] font-black uppercase tracking-wider text-white backdrop-blur-md"
+                    style={{ background:"rgba(0,0,0,.42)", border:"1px solid rgba(255,255,255,.14)" }}>
+                    <Star className="w-3 h-3 fill-current" style={{ color:p.accent }} />
+                    Flagship
+                  </div>
+                )}
+                <span className="absolute top-3 left-3 text-[9px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full backdrop-blur-md"
+                  style={{ background:p.primary ? `${p.accent}22` : "rgba(185,255,41,.15)", color:p.primary ? p.accent : LIME, border:`1px solid ${p.primary ? `${p.accent}55` : "transparent"}` }}>{p.tag}</span>
               </div>
               {/* Text */}
-              <div className="p-5">
-                <h3 className="font-extrabold text-white text-base mb-2 leading-snug">{p.title}</h3>
-                <p className="text-gray-500 text-xs leading-relaxed">{p.desc}</p>
+              <div className={p.primary ? "p-6" : "p-5"}>
+                <h3 className={`font-extrabold text-white mb-2 leading-snug ${p.primary ? "text-2xl" : "text-base"}`}>{p.title}</h3>
+                <p className={`text-gray-500 leading-relaxed ${p.primary ? "text-sm" : "text-xs"}`}>{p.desc}</p>
+                {p.primary && (
+                  <>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-5">
+                      {p.metrics?.map(item => (
+                        <div key={item} className="rounded-xl px-3 py-2 text-[10px] font-bold text-white border border-white/10 bg-white/[.035]">
+                          <span className="block w-1.5 h-1.5 rounded-full mb-2" style={{ background:p.accent, boxShadow:`0 0 12px ${p.accent}` }} />
+                          {item}
+                        </div>
+                      ))}
+                    </div>
+                    <div className="flex flex-wrap gap-2 mt-4">
+                      {p.stack?.map(item => (
+                        <span key={item} className="text-[10px] font-bold px-2.5 py-1 rounded-full border border-white/10 text-gray-300 bg-black/20">{item}</span>
+                      ))}
+                    </div>
+                  </>
+                )}
               </div>
             </div>
-            <div className="p-5 pt-0">
-              <a href="#contact" className="inline-flex items-center gap-1 text-xs font-bold" style={{ color:LIME }}>
-                View Project Details <ChevronRight className="w-3.5 h-3.5"/>
+            <div className={p.primary ? "p-6 pt-0" : "p-5 pt-0"}>
+              <a href="#contact" className={`inline-flex items-center gap-1 text-xs font-bold ${p.primary ? "rounded-full px-4 py-2 border border-white/10 bg-white/[.035]" : ""}`} style={{ color:p.primary ? p.accent : LIME }}>
+                View Project Details <ChevronRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1"/>
               </a>
             </div>
           </motion.div>
