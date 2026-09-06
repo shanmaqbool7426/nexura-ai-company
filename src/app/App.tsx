@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   ArrowRight, Bot, Sparkles, Shield, Zap, Check, Star, Menu, X,
-  ChevronRight, Brain, Globe, Cpu, FileText, Smartphone, GitBranch, Clock, ChevronDown, Users
+  ChevronRight, Brain, Globe, Cpu, FileText, Smartphone, GitBranch, Clock, ChevronDown, Users, TrendingUp, MessageCircle
 } from "lucide-react";
 import { LineChart, Line, ResponsiveContainer } from "recharts";
 import confetti from "canvas-confetti";
@@ -11,11 +11,20 @@ import confetti from "canvas-confetti";
 import robotHand from "../assets/robot_hand.png";
 import brainHologram from "../assets/brain_hologram.png";
 import aiCube from "../assets/ai_cube.jpg";
+import aiHeroVisual from "../assets/ai_hero_visual.png";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 const LIME = "#B9FF29";
 const DARK = "#09090D";
 const CARD = "#111118";
+const WHATSAPP_URL = "https://wa.me/923069829158";
+
+// WhatsApp brand icon (inline SVG)
+const WhatsappIcon = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+);
 
 // ─── Global CSS ────────────────────────────────────────────────────────────────
 const GlobalStyles = () => (
@@ -104,17 +113,22 @@ const HeroVisual = () => {
         </svg>
       </div>
 
-      {/* Hero 3D Robot Hand Image */}
+      {/* Hero AI Neural Brain Image — circular fade into background */}
       <motion.div 
-        className="relative z-10 w-[380px] h-[250px] flex items-center justify-center"
+        className="relative z-10 w-[420px] h-[420px] flex items-center justify-center"
         initial={{ y: 0 }}
         animate={{ y: [-8, 8, -8] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
       >
         <img 
-          src={robotHand} 
-          alt="AI Futuristic Robot Hand" 
-          className="w-full h-full object-contain filter drop-shadow-[0_0_35px_rgba(185,255,41,0.35)]" 
+          src={aiHeroVisual} 
+          alt="AI Agents Automation Hub Visualization" 
+          className="w-full h-full object-contain"
+          style={{
+            maskImage: "radial-gradient(circle, black 45%, transparent 72%)",
+            WebkitMaskImage: "radial-gradient(circle, black 45%, transparent 72%)",
+            filter: "drop-shadow(0 0 55px rgba(185,255,41,0.5)) drop-shadow(0 0 25px rgba(185,255,41,0.25))",
+          }}
         />
       </motion.div>
 
@@ -261,6 +275,12 @@ const Navbar = () => {
         </div>
         {/* CTA */}
         <div className="hidden md:flex items-center gap-3">
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
+            className="flex items-center gap-2 text-xs px-5 py-2.5 rounded-lg font-semibold transition-all"
+            style={{ background:"#25D366", color:"#fff" }}>
+            <WhatsappIcon className="w-4 h-4" />
+            WhatsApp Us
+          </a>
           <a href="#contact" className="lime-outline text-xs px-5 py-2.5 rounded-lg font-semibold transition-all">Get in Touch</a>
         </div>
         <button className="md:hidden" onClick={()=>setOpen(!open)} aria-label="Toggle Navigation Menu">
@@ -279,6 +299,12 @@ const Navbar = () => {
             <a key={l.label} href={l.href} onClick={()=>setOpen(false)} className="block text-sm text-gray-400">{l.label}</a>
           ))}
           <a href="#contact" onClick={()=>setOpen(false)} className="lime-btn block text-center py-2.5 rounded-lg text-sm mt-2 font-bold">Get in Touch</a>
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" onClick={()=>setOpen(false)}
+            className="flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-bold"
+            style={{ background:"#25D366", color:"#fff" }}>
+            <WhatsappIcon className="w-4 h-4" />
+            WhatsApp Us
+          </a>
         </div>
       )}
     </nav>
@@ -359,6 +385,7 @@ const servicesList = [
   { icon: Bot, label:"Custom AI Solutions", desc:"Transform data into intelligence. Advanced generative AI, custom RAG systems, and autonomous agent pipelines.", tags:["LLMs", "RAG", "AI Agents"] },
   { icon: Brain, label:"Machine Learning", desc:"Predictive modeling, computer vision, data analytics, and deep learning algorithms built for business scale.", tags:["PyTorch", "TensorFlow", "MLOps"] },
   { icon: GitBranch, label:"Digital Transformation", desc:"Legacy system modernization, cloud architecture migrations, and automated CI/CD DevOps workflows.", tags:["Cloud", "DevOps", "CI/CD"] },
+  { icon: TrendingUp, label:"Digital Marketing & Growth", desc:"Data-driven digital marketing strategies to grow your business. SEO, paid ads, social media marketing, content strategy, and AI-powered campaign analytics.", tags:["SEO", "Paid Ads", "Social Media"] },
 ];
 
 const Services = () => (
@@ -546,7 +573,7 @@ const TerminalShowcase = () => {
   ];
 
   useEffect(() => {
-    let timer: NodeJS.Timeout;
+    let timer: ReturnType<typeof setTimeout>;
     if (currentStep < steps.length) {
       const step = steps[currentStep];
       if (step.type === 'input') {
@@ -1108,6 +1135,7 @@ const ContactForm = () => {
               <option value="Custom AI & Generative AI">AI &amp; Generative AI Solutions</option>
               <option value="Machine Learning & Data Science">Machine Learning &amp; Data Science</option>
               <option value="Digital Transformation & Cloud">Digital Transformation &amp; Cloud</option>
+              <option value="Digital Marketing & Growth">Digital Marketing &amp; Growth</option>
             </select>
             <ChevronDown className="w-4 h-4 text-gray-400 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" />
           </div>
@@ -1222,7 +1250,7 @@ const Footer = () => (
         </div>
       </div>
       {[
-        { title:"Services", links:["Custom Software","Mobile Apps","Web Applications","Custom AI Solutions","Machine Learning","Digital Transformation"] },
+        { title:"Services", links:["Custom Software","Mobile Apps","Web Applications","Custom AI Solutions","Machine Learning","Digital Transformation","Digital Marketing & Growth"] },
         { title:"Company", links:["About","Careers","Blog","Press","Partners","Contact"] },
         { title:"Engagement", links:["Dedicated Team","Fixed Price","Hourly T&M","SOC 2 Audit","SLA Uptime","Terms of Service"] },
       ].map(col=>(
@@ -1265,6 +1293,18 @@ export default function App() {
       <Testimonials />
       <ContactSection />
       <Footer />
+
+      {/* Floating WhatsApp Button */}
+      <a
+        href={WHATSAPP_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full shadow-lg transition-transform hover:scale-110"
+        style={{ background: "#25D366", boxShadow: "0 4px 20px rgba(37,211,102,0.4)" }}
+        aria-label="Chat on WhatsApp"
+      >
+        <WhatsappIcon className="w-7 h-7 text-white" />
+      </a>
     </div>
   );
 }
