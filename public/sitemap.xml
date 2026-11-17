@@ -1,7 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://nexora-ai.com/</loc>
-    <lastmod>2026-11-16</lastmod>
+    <loc>https://www.neexoraai.com/</loc>
+    <lastmod>2026-11-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.neexoraai.com/ontario/</loc>
+    <lastmod>2026-11-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.neexoraai.com/toronto/</loc>
+    <lastmod>2026-11-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.neexoraai.com/etobicoke/</loc>
+    <lastmod>2026-11-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.neexoraai.com/mississauga/</loc>
+    <lastmod>2026-11-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.neexoraai.com/brampton/</loc>
+    <lastmod>2026-11-17</lastmod>
+  </url>
+  <url>
+    <loc>https://www.neexoraai.com/case-studies/bridge-legal/</loc>
+    <lastmod>2026-11-17</lastmod>
   </url>
 </urlset>

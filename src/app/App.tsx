@@ -1282,6 +1282,10 @@ const ProcessTimeline = () => (
 );
 
 // ─── Locations served ───────────────────────────────────────────────────────────
+// Cities with a static landing page (see scripts/generate-city-pages.mjs).
+const ONTARIO_PAGES: Record<string, string> = {
+  Toronto: "toronto", Etobicoke: "etobicoke", Mississauga: "mississauga", Brampton: "brampton",
+};
 const locations = [
   { country: "Canada", flag: "CA", note: "SEO, web design and AI automation for businesses in every province.",
     cities: ["Toronto", "Etobicoke", "Mississauga", "Brampton", "Vaughan", "Oakville", "Ottawa", "Hamilton", "Vancouver", "Calgary", "Edmonton", "Montreal"] },
@@ -1306,11 +1310,15 @@ const Locations = () => (
             <h3 className="font-extrabold text-gray-900 text-lg mb-1">Digital marketing in {loc.country}</h3>
             <p className="text-sm text-gray-500 mb-5">{loc.note}</p>
             <ul className="flex flex-wrap gap-2">
-              {loc.cities.map(c => (
-                <li key={c} className="inline-flex items-center gap-1 text-xs font-semibold px-3 py-1.5 rounded-full bg-gray-100 text-gray-700">
-                  <MapPin className="w-3 h-3 text-lime-700" /> {c}
-                </li>
-              ))}
+              {loc.cities.map(c => {
+                const slug = loc.country === "Canada" ? ONTARIO_PAGES[c] : undefined;
+                return (
+                  <li key={c} className="inline-flex items-center gap-1 text-xs font-semibold px-3 py-1.5 rounded-full bg-gray-100 text-gray-700">
+                    <MapPin className="w-3 h-3 text-lime-700" />
+                    {slug ? <a href={`/${slug}/`} className="hover:underline">{c}</a> : c}
+                  </li>
+                );
+              })}
             </ul>
           </div>
         ))}
@@ -1676,6 +1684,13 @@ const ContactSection = () => (
 const FOOTER_COLS = [
   { title: "Services", links: servicesList.map(s => ({ l: s.label, h: "#services" })) },
   { title: "SEO", links: ["Technical SEO", "On-page & off-page SEO", "Link building", "Keyword research", "SEO audits", "GEO, AEO & LLM visibility"].map(l => ({ l, h: "#services" })) },
+  { title: "Ontario SEO", links: [
+    { l: "SEO in Toronto", h: "/toronto/" },
+    { l: "SEO in Etobicoke", h: "/etobicoke/" },
+    { l: "SEO in Mississauga", h: "/mississauga/" },
+    { l: "SEO in Brampton", h: "/brampton/" },
+    { l: "All of Ontario", h: "/ontario/" },
+  ] },
   { title: "Company", links: [
     { l: "Growth Path", h: "#growth-path" },
     { l: "Case Studies", h: "#clients" },
@@ -1688,7 +1703,7 @@ const FOOTER_COLS = [
 
 const Footer = () => (
   <footer style={{ background:"#07070B" }} className="border-t border-white/5 text-gray-400 py-16">
-    <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10">
+    <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-10">
       <div className="lg:col-span-2">
         <div className="mb-4"><Logo /></div>
         <p className="text-sm leading-relaxed max-w-sm mb-5">
