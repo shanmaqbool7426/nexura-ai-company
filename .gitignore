@@ -13,12 +13,9 @@ yarn-error.log*
 pnpm-debug.log*
 
 # Local environment files
-.env
-.env.*
 !.env.example
 
 # Editor and OS files
-.vscode/
 .idea/
 .DS_Store
 Thumbs.db
@@ -27,3 +24,7 @@ Thumbs.db
 .cache/
 .vite/
 coverage/
+branch_structure.json
+temp_auto_push.bat
+temp_interactive_push.bat
+config.bat
