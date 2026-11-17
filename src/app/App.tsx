@@ -17,6 +17,12 @@ import clientWinImg from "../assets/legal/client-win.jpg";
 import lawyerSuitImg from "../assets/legal/lawyer-suit.jpg";
 import consultationImg from "../assets/legal/consultation.jpg";
 import signingImg from "../assets/legal/signing.jpg";
+import tradespersonImg from "../assets/industries/tradesperson.jpg";
+import clinicImg from "../assets/industries/clinic.jpg";
+import constructionTeamImg from "../assets/industries/construction-team.jpg";
+// Real homepage screenshots of client websites
+import bridgeLegalSiteImg from "../assets/clients/bridge-legal-site.jpg";
+import arzConstructionSiteImg from "../assets/clients/arz-construction-site.jpg";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 const LIME = "#B9FF29";
@@ -275,10 +281,10 @@ const SerpMockup = () => (
 
 // ─── Navbar ────────────────────────────────────────────────────────────────────
 const NAV_LINKS = [
-  { label: "Law Firm Marketing", href: "#law-firms" },
+  { label: "Industries", href: "#industries" },
   { label: "Services", href: "#services" },
   { label: "Our Work", href: "#work" },
-  { label: "Case Study", href: "#case-study" },
+  { label: "Clients", href: "#clients" },
   { label: "Process", href: "#process" },
   { label: "FAQ", href: "#faq" },
   { label: "Pricing", href: "#pricing" },
@@ -344,6 +350,35 @@ const Navbar = () => {
   );
 };
 
+// Rotating "for law firms / construction companies / clinics" line under the H1
+const AUDIENCES = [
+  { label: "law firms & paralegals", icon: Scale },
+  { label: "construction & renovation companies", icon: Hammer },
+  { label: "clinics & healthcare practices", icon: Stethoscope },
+];
+
+const RotatingAudience = () => {
+  const [i, setI] = useState(0);
+  useEffect(() => {
+    const t = setInterval(() => setI(n => (n + 1) % AUDIENCES.length), 2600);
+    return () => clearInterval(t);
+  }, []);
+  const A = AUDIENCES[i];
+  return (
+    <div className="flex items-center gap-3 mb-6 h-10" aria-hidden="true">
+      <span className="text-gray-400 text-lg">for</span>
+      <AnimatePresence mode="wait">
+        <motion.span key={A.label}
+          initial={{ opacity:0, y:12 }} animate={{ opacity:1, y:0 }} exit={{ opacity:0, y:-12 }} transition={{ duration:.3 }}
+          className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm sm:text-base font-bold"
+          style={{ background:"rgba(185,255,41,.12)", color: LIME, border:"1px solid rgba(185,255,41,.3)" }}>
+          <A.icon className="w-4 h-4" /> {A.label}
+        </motion.span>
+      </AnimatePresence>
+    </div>
+  );
+};
+
 // ─── Hero ──────────────────────────────────────────────────────────────────────
 const Hero = () => (
   <section id="top" className="relative min-h-screen pt-16 flex items-center overflow-hidden" style={{ background: DARK }}>
@@ -366,25 +401,27 @@ const Hero = () => (
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border mb-6 text-xs font-semibold tracking-wide"
           style={{ borderColor:"rgba(185,255,41,.3)", color:LIME, background:"rgba(185,255,41,.05)" }}>
           <div className="w-1.5 h-1.5 rounded-full blink" style={{ background:LIME }} />
-          Law Firm Marketing Agency · Canada &amp; USA
+          Digital Growth Agency · Canada, USA &amp; UK
         </div>
 
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.07] tracking-tight text-white mb-6">
-          Law firm SEO &amp; marketing that brings you <span className="grad-text">more clients</span>
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.07] tracking-tight text-white mb-5">
+          Websites, SEO &amp; AI automation that bring you <span className="grad-text">more clients</span>
+          <span className="sr-only"> for law firms, construction companies and clinics</span>
         </h1>
+        <RotatingAudience />
 
         <p className="text-gray-300 text-lg leading-relaxed mb-4 max-w-xl">
-          We help law firms, lawyers and paralegals across Canada and the USA rank higher on Google,
-          show up in AI search, and turn more website visitors into signed clients.
+          We help law firms, paralegals, construction companies and clinics across Canada, the USA and
+          the UK rank higher on Google, show up in AI search, and turn more visitors into paying clients.
         </p>
         <p className="text-gray-400 text-sm leading-relaxed mb-8 max-w-xl">
-          Website design, local SEO, Google Business Profile optimization, and AI intake chatbots that
-          answer enquiries 24/7, all from one team built around how people actually look for a lawyer.
+          Website design, SEO, local SEO, Google Business Profile optimization, AI business automation and
+          AI chatbots that answer enquiries 24/7, all from one team.
         </p>
 
         <div className="flex flex-wrap gap-3 mb-10">
           <a href="#contact" className="lime-btn flex items-center gap-2 px-7 py-3.5 rounded-xl text-sm shadow-lg shadow-lime-400/20">
-            Get a Free Law Firm Growth Audit <ArrowRight className="w-4 h-4" />
+            Get a Free Growth Audit <ArrowRight className="w-4 h-4" />
           </a>
           <a href="#services" className="lime-outline flex items-center gap-2 px-6 py-3.5 rounded-xl text-sm font-semibold">
             Explore Services
@@ -393,7 +430,7 @@ const Hero = () => (
 
         <ul className="grid grid-cols-2 sm:grid-cols-4 gap-5">
           {[
-            { val:"CA + US", label:"Markets served" },
+            { val:"CA · US · UK", label:"Markets served" },
             { val:"24/7", label:"AI client intake" },
             { val:"Local", label:"Map-pack focus" },
             { val:"Monthly", label:"Plain-English reports" },
@@ -416,8 +453,8 @@ const Hero = () => (
 
 // ─── Practice-area marquee ──────────────────────────────────────────────────────
 const MARQUEE_ITEMS = [
-  "Personal Injury", "Family Law", "Immigration", "Criminal Defence", "Real Estate Law",
-  "Employment Law", "Wills & Estates", "Corporate Law", "Paralegal Services", "Civil Litigation",
+  "Law Firms", "Paralegals", "Construction", "Home Renovation", "Clinics", "Dental Practices",
+  "Personal Injury", "Immigration", "Traffic Ticket Defence", "Loft Conversions", "Real Estate", "Local Services",
 ];
 
 const Marquee = () => (
@@ -434,6 +471,85 @@ const Marquee = () => (
   </div>
 );
 
+// ─── Industries we serve ────────────────────────────────────────────────────────
+const industries = [
+  {
+    id: "law",
+    icon: Scale,
+    title: "Law Firms & Paralegals",
+    img: ladyJusticeImg,
+    alt: "Lady Justice statue representing law firm marketing",
+    desc: "Rank for \"lawyer near me\", win the Google Maps 3-pack and capture every enquiry with a 24/7 legal intake assistant.",
+    points: ["Lawyer & paralegal SEO", "Practice-area & city pages", "AI legal intake chatbot"],
+    href: "#law-firms",
+    tag: "Our specialty",
+  },
+  {
+    id: "construction",
+    icon: Hammer,
+    title: "Construction & Renovation",
+    img: tradespersonImg,
+    alt: "Tradesperson at work, representing marketing for construction companies",
+    desc: "Get more quote requests for extensions, loft conversions, renovations and trades from homeowners searching in your area.",
+    points: ["Contractor SEO & local SEO", "Project gallery websites", "Automated quote follow-up"],
+    href: "#clients",
+    tag: "Builders & trades",
+  },
+  {
+    id: "clinics",
+    icon: Stethoscope,
+    title: "Clinics & Healthcare",
+    img: clinicImg,
+    alt: "Doctor speaking with a patient, representing marketing for clinics",
+    desc: "Fill your appointment book with patients searching for a clinic, dentist, physio or specialist near them.",
+    points: ["Clinic & dental SEO", "Online booking websites", "AI appointment assistant"],
+    href: "#contact",
+    tag: "Clinics & practices",
+  },
+];
+
+const Industries = () => (
+  <section id="industries" className="py-24 bg-white text-gray-900">
+    <div className="max-w-7xl mx-auto px-6">
+      <SectionHeading
+        eyebrow="Industries we serve"
+        title="Built for businesses that win clients locally"
+        intro="Law firms are our specialty, and we bring the same proven system of website, SEO, Google Business Profile and AI automation to construction companies and clinics across Canada, the USA and the UK."
+      />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {industries.map((ind, i) => (
+          <motion.article key={ind.id}
+            className="group relative rounded-3xl overflow-hidden bg-gray-950 text-white min-h-[520px] flex flex-col justify-end shadow-xl"
+            initial={{ opacity:0, y:24 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:.5, delay:i*.08 }}>
+            <img src={ind.img} alt={ind.alt} loading="lazy"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <div className="absolute inset-0" style={{ background:"linear-gradient(180deg, rgba(9,9,13,.05) 0%, rgba(9,9,13,.55) 40%, rgba(9,9,13,.97) 78%)" }} />
+            <span className="absolute top-5 left-5 text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full"
+              style={{ background: LIME, color: DARK }}>{ind.tag}</span>
+            <div className="relative p-7">
+              <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-4 glass">
+                <ind.icon className="w-5 h-5" style={{ color: LIME }} />
+              </div>
+              <h3 className="text-2xl font-black mb-2">{ind.title}</h3>
+              <p className="text-gray-300 text-sm leading-relaxed mb-4 min-h-[66px]">{ind.desc}</p>
+              <ul className="space-y-1.5 mb-5">
+                {ind.points.map(p => (
+                  <li key={p} className="flex items-center gap-2 text-sm text-gray-200">
+                    <Check className="w-4 h-4 shrink-0" style={{ color: LIME }} /> {p}
+                  </li>
+                ))}
+              </ul>
+              <a href={ind.href} className="inline-flex items-center gap-1.5 text-sm font-bold" style={{ color: LIME }}>
+                Learn more <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </a>
+            </div>
+          </motion.article>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
 // ─── Why law firms lose clients ────────────────────────────────────────────────
 const painPoints = [
   { icon: Search, title: "Clients can't find you", desc: "Most people start by searching \"lawyer near me\" or asking an AI assistant. If you're not in the top three map results, that call goes to another firm." },
@@ -442,7 +558,7 @@ const painPoints = [
 ];
 
 const LawFirmProblem = () => (
-  <section id="law-firms" className="py-24 bg-white text-gray-900">
+  <section id="law-firms" className="py-24 bg-gray-50 text-gray-900 border-y border-gray-100">
     <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
       {/* Photo collage */}
       <motion.div className="relative h-[460px] sm:h-[560px]"
@@ -468,7 +584,7 @@ const LawFirmProblem = () => (
 
       <div>
         <SectionHeading center={false}
-          eyebrow="Legal marketing for law firms"
+          eyebrow="Spotlight: law firms & paralegals"
           title="Why good law firms lose clients online, and how we fix it"
           intro="You're good at practising law. Clients choose who to call long before they meet you, from what they see on Google, Google Maps, your reviews and your website. We make sure that first impression wins the call."
         />
@@ -496,33 +612,33 @@ const LawFirmProblem = () => (
 const servicesList = [
   {
     icon: Globe,
-    label: "Law Firm Website Design & Development",
-    desc: "Fast, mobile-first websites for law firms with a dedicated page for every practice area and city you serve, attorney and lawyer bios that build trust, and clear calls to book a consultation.",
-    points: ["Practice-area & location pages", "Under 2-second load times", "Built to convert visitors into consultations"],
+    label: "Website Design & Development",
+    desc: "Fast, mobile-first websites for law firms, contractors and clinics, with a page for every service and city you cover, trust signals that win the call, and clear ways to book or request a quote.",
+    points: ["Service & location pages", "Under 2-second load times", "Built to turn visitors into enquiries"],
   },
   {
     icon: Search,
-    label: "Law Firm SEO & AI Search Visibility",
-    desc: "Lawyer SEO that targets the searches your future clients make, plus structured content and schema so ChatGPT, Google AI Overviews, Gemini and Perplexity understand and recommend your firm.",
-    points: ["Keyword research by practice area", "Technical SEO & legal schema markup", "AI search (GEO/AEO) optimization"],
+    label: "SEO & AI Search Visibility",
+    desc: "SEO that targets the searches your future clients make, plus structured content and schema so ChatGPT, Google AI Overviews, Gemini and Perplexity understand and recommend your business.",
+    points: ["Keyword research by service & city", "Technical SEO & schema markup", "AI search (GEO/AEO) optimization"],
   },
   {
     icon: MapPin,
-    label: "Local SEO & Google Business Profile for Lawyers",
-    desc: "Rank in the Google Maps 3-pack for \"lawyer near me\" searches in your city. We optimize your Google Business Profile, build consistent legal directory citations, and set up an ethical review strategy.",
-    points: ["Google Business Profile optimization", "Legal directory citations", "Review generation workflow"],
+    label: "Local SEO & Google Business Profile",
+    desc: "Rank in the Google Maps 3-pack when people search \"near me\". We optimize your Google Business Profile, build consistent directory citations and set up an honest review strategy.",
+    points: ["Google Business Profile optimization", "Local directory citations", "Review generation workflow"],
   },
   {
     icon: Zap,
-    label: "AI Business Automation for Law Firms",
-    desc: "Automate the repetitive work around new clients: instant lead follow-up, consultation scheduling, intake forms, reminders and CRM updates, so your team spends time on legal work, not admin.",
-    points: ["Automated lead follow-up", "Consultation booking & reminders", "CRM & practice-management integrations"],
+    label: "AI Business Automation",
+    desc: "Automate the repetitive work around new clients: instant lead follow-up, booking, quote and intake forms, reminders and CRM updates, so your team spends its time on paid work, not admin.",
+    points: ["Automated lead & quote follow-up", "Booking & reminders", "CRM & software integrations"],
   },
   {
     icon: Bot,
-    label: "AI Chatbot & 24/7 Legal Intake Assistant",
-    desc: "A chatbot trained on your firm that answers common questions, qualifies enquiries by practice area and urgency, and books consultations day and night, without giving legal advice.",
-    points: ["Qualifies leads by case type", "Books directly into your calendar", "Website, Facebook & WhatsApp"],
+    label: "AI Chatbot Development",
+    desc: "A chatbot trained on your business that answers common questions, qualifies enquiries and books consultations, site visits or appointments day and night. For law firms, it never gives legal advice.",
+    points: ["Qualifies every enquiry", "Books directly into your calendar", "Website, Facebook & WhatsApp"],
   },
 ];
 
@@ -567,7 +683,7 @@ const Services = () => (
             <h3 className="font-black text-2xl leading-tight mb-3">Not sure where to start?</h3>
             <p className="text-sm leading-relaxed font-medium opacity-80">
               Get a free audit of your website, Google rankings and Google Business Profile. We'll show you
-              exactly where you're losing potential clients to competing firms.
+              exactly where you're losing potential clients to competitors.
             </p>
           </div>
           <a href="#contact" className="mt-6 inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-bold text-white" style={{ background: DARK }}>
@@ -671,22 +787,22 @@ const ChatbotSection = () => (
   <section className="py-24 overflow-hidden" style={{ background: DARK }}>
     <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
       <motion.div initial={{ opacity:0, x:-24 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} transition={{ duration:.6 }}>
-        <p className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color:LIME }}>AI legal intake chatbot</p>
+        <p className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color:LIME }}>AI chatbot &amp; 24/7 intake assistant</p>
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight mb-6">
           Never miss a potential client again, <span style={{ color:LIME }}>even at 2 AM</span>
         </h2>
         <p className="text-gray-400 leading-relaxed mb-8">
-          Your AI intake assistant greets every visitor, gathers the key facts of their matter, screens out
-          enquiries you don't take, and books qualified prospects straight into your calendar. Your team
-          wakes up to a summary of each lead.
+          Your AI assistant greets every visitor, gathers the key details, screens out enquiries you don't
+          take, and books qualified prospects straight into your calendar, whether that's a legal
+          consultation, a site visit for a quote or a clinic appointment. You wake up to a summary of each lead.
         </p>
         <ul className="space-y-3.5 mb-8">
           {[
-            "Trained on your firm's practice areas, fees and FAQs",
-            "Qualifies by case type, location, urgency and conflicts",
-            "Books consultations and sends confirmations automatically",
-            "Gives general information only, never legal advice",
-            "Syncs leads to Clio, your CRM, email or WhatsApp",
+            "Trained on your services, prices and FAQs",
+            "Qualifies by service, location and urgency",
+            "Books consultations, site visits & appointments",
+            "For law firms: general information only, never legal advice",
+            "Syncs leads to your CRM, Clio, email or WhatsApp",
           ].map(f => (
             <li key={f} className="flex items-center gap-3">
               <span className="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style={{ background:"rgba(185,255,41,.15)" }}>
@@ -697,7 +813,7 @@ const ChatbotSection = () => (
           ))}
         </ul>
         <a href="#contact" className="lime-btn inline-flex items-center gap-2 px-7 py-3.5 rounded-xl text-sm">
-          See a Demo for Your Firm <ArrowRight className="w-4 h-4" />
+          See a Demo for Your Business <ArrowRight className="w-4 h-4" />
         </a>
       </motion.div>
       <motion.div initial={{ opacity:0, x:24 }} whileInView={{ opacity:1, x:0 }} viewport={{ once:true }} transition={{ duration:.6, delay:.1 }}>
@@ -959,7 +1075,7 @@ const Showcase = () => {
       <div className="relative max-w-6xl mx-auto px-6">
         <SectionHeading dark
           eyebrow="Snapshots of our work"
-          title={<>See what we build <span className="grad-text">for law firms</span></>}
+          title={<>See what we build <span className="grad-text">for our clients</span></>}
           intro="From the website your clients land on, to the Google profile that brings them there, to the report that shows what it's earning you."
         />
         <div className="flex flex-wrap justify-center gap-2 mb-10" role="tablist" aria-label="Work snapshots">
@@ -991,10 +1107,10 @@ const PhotoCta = () => (
     <div className="relative max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
       <div>
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight mb-5">
-          Right now, someone in your city is searching for <span className="grad-text">a lawyer like you.</span>
+          Right now, someone in your city is searching for <span className="grad-text">a business like yours.</span>
         </h2>
         <p className="text-gray-300 leading-relaxed mb-8 max-w-lg">
-          Will they find your firm or a competitor's? Get a free audit and see exactly where you stand on
+          Will they find you or a competitor? Get a free audit and see exactly where you stand on
           Google, Google Maps and AI search.
         </p>
         <div className="flex flex-wrap gap-3">
@@ -1026,107 +1142,116 @@ const PhotoCta = () => (
   </section>
 );
 
-// ─── Client case study: Bridge Legal Services ──────────────────────────────────
-// Edit CASE_STUDY to match the exact work delivered for this client.
-// Only publish results (rankings, call volume, leads) once you have the real numbers.
-const CASE_STUDY = {
-  client: "Bridge Legal Services",
-  sector: "Legal services",
-  summary:
-    "Bridge Legal Services came to us to strengthen their online presence and make it easier for people who need legal help to find them and get in touch.",
-  scope: [
-    "Website design & development",
-    "Local SEO & Google Business Profile optimization",
-    "On-page SEO for each practice area",
-    "Contact and consultation-request flow",
-  ],
-  tracking: [
-    "Map-pack and organic rankings for priority searches",
-    "Calls and direction requests from Google Business Profile",
-    "Consultation requests from the website",
-  ],
-};
+// ─── Our clients: real case studies ─────────────────────────────────────────────
+// Edit `scope` to match exactly what you delivered for each client.
+// Only add results (rankings, calls, leads) once you have the real numbers.
+const CLIENTS = [
+  {
+    name: "Bridge Legal Services",
+    url: "https://bridgelegalservices.ca/",
+    domain: "bridgelegalservices.ca",
+    img: bridgeLegalSiteImg,
+    industry: "Legal · Licensed paralegals",
+    location: "Etobicoke, Ontario, Canada",
+    icon: Scale,
+    summary:
+      "A licensed paralegal firm defending drivers against traffic tickets and Highway Traffic Act charges across Toronto, Mississauga, Brampton and the GTA. They needed a site that turns a worried driver's search into a booked case review.",
+    scope: [
+      "Website design & development",
+      "SEO for traffic-ticket and charge-specific searches",
+      "Local SEO & Google Business Profile across GTA offices",
+      "Free case-review form, call and WhatsApp lead capture",
+    ],
+  },
+  {
+    name: "ARZ Construction Ltd",
+    url: "https://arzconstructionltd.com/",
+    domain: "arzconstructionltd.com",
+    img: arzConstructionSiteImg,
+    industry: "Construction · Residential renovation",
+    location: "Croydon & South London, UK",
+    icon: Hammer,
+    summary:
+      "A residential construction company delivering house extensions, loft conversions and full renovations for homeowners in Croydon and South London. They needed a site that wins homeowners' trust and turns visits into quote requests.",
+    scope: [
+      "Website design & development",
+      "SEO for extensions, loft conversions & renovations",
+      "Local SEO & Google Business Profile for Croydon and South London",
+      "Free-quote, call and WhatsApp lead capture",
+    ],
+  },
+];
 
-const CaseStudyVisual = () => (
-  <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-white" role="img"
-    aria-label={`Website and Google Business Profile work for ${CASE_STUDY.client}`}>
-    <div className="flex items-center gap-2 px-4 py-2.5 bg-gray-100 border-b border-gray-200">
+const ClientShot = ({ c }: { c: typeof CLIENTS[number] }) => (
+  <a href={c.url} target="_blank" rel="noopener noreferrer"
+    className="group block rounded-2xl overflow-hidden bg-white border border-gray-200 photo-frame">
+    <div className="flex items-center gap-2 px-4 py-2.5 bg-[#F1F1F4] border-b border-gray-200">
       <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56]" />
       <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
       <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F]" />
-      <div className="ml-3 flex-1 rounded-md bg-white px-3 py-1 text-[11px] text-gray-400 truncate">{CASE_STUDY.client}</div>
-    </div>
-    <div className="relative px-7 pt-8 pb-10 overflow-hidden" style={{ background:"#0f1b2d" }}>
-      <img src={ladyJusticeImg} alt="" className="absolute inset-0 w-full h-full object-cover object-right" loading="lazy" />
-      <div className="absolute inset-0" style={{ background:"linear-gradient(90deg, rgba(15,27,45,.97) 0%, rgba(15,27,45,.85) 50%, rgba(15,27,45,.25) 100%)" }} />
-      <div className="relative">
-      <div className="flex items-center justify-between mb-10">
-        <div className="flex items-center gap-2 text-white">
-          <Scale className="w-5 h-5 text-amber-300" />
-          <span className="font-bold tracking-wide text-sm">{CASE_STUDY.client}</span>
-        </div>
-        <div className="hidden sm:flex gap-4 text-[11px] text-white/60">
-          <span>Services</span><span>About</span><span>Contact</span>
-        </div>
-      </div>
-      <div className="text-white text-2xl sm:text-3xl font-black leading-tight max-w-xs mb-3">Legal help you can rely on.</div>
-      <div className="text-white/60 text-xs max-w-xs mb-6">Clear advice, honest fees and a team that answers.</div>
-      <div className="inline-flex items-center gap-2 rounded-lg bg-amber-300 px-4 py-2 text-xs font-bold text-[#0f1b2d]">
-        <Calendar className="w-3.5 h-3.5" /> Book a consultation
-      </div>
+      <div className="ml-3 flex-1 rounded-md bg-white px-3 py-1 text-[11px] text-gray-500 flex items-center gap-1.5 truncate">
+        <Shield className="w-3 h-3 text-green-600" /> {c.domain}
       </div>
     </div>
-    <div className="grid grid-cols-3 divide-x divide-gray-100 border-t border-gray-100">
-      {[{ i: Globe, t:"New website" }, { i: MapPin, t:"Google Business Profile" }, { i: Search, t:"Local SEO" }].map(x => (
-        <div key={x.t} className="flex flex-col items-center gap-1.5 py-4 px-2 text-center">
-          <x.i className="w-4 h-4 text-lime-700" />
-          <span className="text-[11px] font-bold text-gray-700">{x.t}</span>
-        </div>
-      ))}
+    <div className="relative overflow-hidden aspect-[16/10]">
+      <img src={c.img} alt={`Homepage of ${c.name}, designed by ${BRAND}`} loading="lazy"
+        className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]" />
+      <div className="absolute inset-0 flex items-end justify-end p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+        <span className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-bold shadow-lg" style={{ background: LIME, color: DARK }}>
+          Visit live site <ArrowRight className="w-3.5 h-3.5" />
+        </span>
+      </div>
     </div>
-  </div>
+  </a>
 );
 
-const CaseStudy = () => (
-  <section id="case-study" className="py-24 bg-white text-gray-900">
+const ClientsSection = () => (
+  <section id="clients" className="py-24 bg-white text-gray-900">
     <div className="max-w-7xl mx-auto px-6">
       <SectionHeading
-        eyebrow="Client work"
-        title={<>Case study: {CASE_STUDY.client}</>}
-        intro="How we're helping a legal practice get found by the people who need them."
+        eyebrow="Our recent clients"
+        title={<>Real businesses, real websites, <span className="text-lime-700">live today</span></>}
+        intro="Two recent projects, one in law and one in construction, on opposite sides of the Atlantic. Click a screenshot to visit the live site."
       />
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:.6 }}>
-          <CaseStudyVisual />
-        </motion.div>
-        <motion.div initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:.6, delay:.1 }}>
-          <span className="inline-block text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-lime-100 text-lime-800 mb-4">
-            {CASE_STUDY.sector}
-          </span>
-          <p className="text-gray-700 text-lg leading-relaxed mb-8">{CASE_STUDY.summary}</p>
-
-          <h3 className="font-extrabold text-gray-900 mb-3">What we delivered</h3>
-          <ul className="space-y-2.5 mb-8">
-            {CASE_STUDY.scope.map(s => (
-              <li key={s} className="flex items-start gap-2.5 text-sm text-gray-700">
-                <Check className="w-4 h-4 mt-0.5 shrink-0 text-lime-700" /> {s}
-              </li>
-            ))}
-          </ul>
-
-          <h3 className="font-extrabold text-gray-900 mb-3">What we measure every month</h3>
-          <ul className="space-y-2.5 mb-8">
-            {CASE_STUDY.tracking.map(s => (
-              <li key={s} className="flex items-start gap-2.5 text-sm text-gray-700">
-                <TrendingUp className="w-4 h-4 mt-0.5 shrink-0 text-lime-700" /> {s}
-              </li>
-            ))}
-          </ul>
-
-          <a href="#contact" className="inline-flex items-center gap-2 rounded-xl px-6 py-3.5 text-sm font-bold text-white" style={{ background: DARK }}>
-            Get the same for your firm <ArrowRight className="w-4 h-4" />
-          </a>
-        </motion.div>
+      <div className="space-y-20">
+        {CLIENTS.map((c, i) => (
+          <motion.article key={c.name}
+            className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center"
+            initial={{ opacity:0, y:24 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:.6 }}>
+            <div className={i % 2 ? "lg:order-2" : ""}>
+              <ClientShot c={c} />
+            </div>
+            <div>
+              <div className="flex flex-wrap items-center gap-2 mb-4">
+                <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-lime-100 text-lime-800">
+                  <c.icon className="w-3 h-3" /> {c.industry}
+                </span>
+                <span className="inline-flex items-center gap-1 text-[11px] font-semibold px-2.5 py-1 rounded-full bg-gray-100 text-gray-700">
+                  <MapPin className="w-3 h-3" /> {c.location}
+                </span>
+              </div>
+              <h3 className="text-3xl font-black tracking-tight mb-4">{c.name}</h3>
+              <p className="text-gray-600 leading-relaxed mb-6">{c.summary}</p>
+              <h4 className="font-extrabold text-gray-900 text-sm uppercase tracking-wider mb-3">What we delivered</h4>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5 mb-7">
+                {c.scope.map(s => (
+                  <li key={s} className="flex items-start gap-2.5 text-sm text-gray-700">
+                    <Check className="w-4 h-4 mt-0.5 shrink-0 text-lime-700" /> {s}
+                  </li>
+                ))}
+              </ul>
+              <div className="flex flex-wrap gap-3">
+                <a href={c.url} target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-bold border border-gray-200 hover:border-gray-900 transition-colors">
+                  <Globe className="w-4 h-4" /> {c.domain}
+                </a>
+                <a href="#contact" className="inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-bold text-white" style={{ background: DARK }}>
+                  Get the same for your business <ArrowRight className="w-4 h-4" />
+                </a>
+              </div>
+            </div>
+          </motion.article>
+        ))}
       </div>
     </div>
   </section>
@@ -1163,30 +1288,31 @@ const ProcessTimeline = () => (
 );
 
 // ─── Locations served ───────────────────────────────────────────────────────────
-const locations = {
-  Canada: ["Toronto", "Vancouver", "Calgary", "Ottawa", "Mississauga", "Brampton", "Edmonton", "Winnipeg", "Hamilton", "Montreal", "Surrey", "Halifax"],
-  "United States": ["New York", "Los Angeles", "Chicago", "Houston", "Dallas", "Miami", "Phoenix", "Atlanta", "Seattle", "San Diego", "Denver", "Boston"],
-};
+const locations = [
+  { country: "Canada", flag: "CA", note: "Law firm content written with each province's Law Society advertising rules in mind.",
+    cities: ["Toronto", "Etobicoke", "Mississauga", "Brampton", "Vaughan", "Oakville", "Ottawa", "Hamilton", "Vancouver", "Calgary", "Edmonton", "Montreal"] },
+  { country: "United States", flag: "US", note: "Attorney content written with state bar advertising rules in mind.",
+    cities: ["New York", "Los Angeles", "Chicago", "Houston", "Dallas", "Miami", "Phoenix", "Atlanta", "Seattle", "San Diego", "Denver", "Boston"] },
+  { country: "United Kingdom", flag: "UK", note: "Local SEO for builders, trades, clinics and legal practices across the UK.",
+    cities: ["London", "Croydon", "South London", "Manchester", "Birmingham", "Leeds", "Bristol", "Liverpool", "Kent", "Surrey", "Glasgow", "Edinburgh"] },
+];
 
 const Locations = () => (
-  <section className="py-24 bg-gray-50 text-gray-900 border-y border-gray-100">
+  <section id="locations" className="py-24 bg-gray-50 text-gray-900 border-y border-gray-100">
     <div className="max-w-7xl mx-auto px-6">
       <SectionHeading
         eyebrow="Areas we serve"
-        title="Lawyer SEO across Canada and the USA"
-        intro="We work remotely with law firms in every province and state, and build local SEO campaigns that target the specific cities and neighbourhoods where you want more clients."
+        title="Local SEO across Canada, the USA and the UK"
+        intro="We work remotely with businesses in every province, state and region, and build local SEO campaigns around the exact cities and neighbourhoods where you want more clients."
       />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {Object.entries(locations).map(([country, cities]) => (
-          <div key={country} className="rounded-2xl bg-white border border-gray-100 p-7">
-            <h3 className="font-extrabold text-gray-900 text-lg mb-1">Law firm marketing in {country}</h3>
-            <p className="text-sm text-gray-500 mb-5">
-              {country === "Canada"
-                ? "Content written with the Law Society advertising rules of each province in mind."
-                : "Content written with state bar attorney-advertising rules in mind."}
-            </p>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {locations.map(loc => (
+          <div key={loc.country} className="rounded-2xl bg-white border border-gray-100 p-7 hover:shadow-xl hover:border-lime-300 transition-all">
+            <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl mb-4 text-sm font-black tracking-wider" style={{ background: DARK, color: LIME }} aria-hidden="true">{loc.flag}</div>
+            <h3 className="font-extrabold text-gray-900 text-lg mb-1">Digital marketing in {loc.country}</h3>
+            <p className="text-sm text-gray-500 mb-5">{loc.note}</p>
             <ul className="flex flex-wrap gap-2">
-              {cities.map(c => (
+              {loc.cities.map(c => (
                 <li key={c} className="inline-flex items-center gap-1 text-xs font-semibold px-3 py-1.5 rounded-full bg-gray-100 text-gray-700">
                   <MapPin className="w-3 h-3 text-lime-700" /> {c}
                 </li>
@@ -1201,33 +1327,41 @@ const Locations = () => (
 
 // ─── Other industries ───────────────────────────────────────────────────────────
 const otherIndustries = [
-  { icon: Stethoscope, name: "Clinics & healthcare" },
-  { icon: Hammer, name: "Contractors & home services" },
   { icon: Home, name: "Real estate & mortgages" },
   { icon: Briefcase, name: "Accountants & consultants" },
   { icon: Wrench, name: "Auto repair & dealerships" },
   { icon: ShoppingBag, name: "Local retail & e-commerce" },
+  { icon: Users, name: "Salons, spas & fitness" },
+  { icon: Building2, name: "Property management" },
 ];
 
 const OtherIndustries = () => (
   <section className="py-20 bg-white text-gray-900">
     <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-      <div className="lg:col-span-5">
-        <p className="text-xs font-bold uppercase tracking-widest text-lime-700 mb-3">Beyond legal</p>
-        <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-4">We also help other local businesses grow</h2>
-        <p className="text-gray-600 leading-relaxed">
-          Law firms are our specialty, but the same mix of website design, local SEO, Google Business Profile
-          optimization and AI automation works for any business that depends on local customers.
-        </p>
+      <div className="lg:col-span-5 relative">
+        <img src={constructionTeamImg} alt="Construction team on a building site" loading="lazy"
+          className="photo-frame w-full h-72 object-cover rounded-3xl" />
+        <div className="float-1 absolute -bottom-6 right-6 rounded-2xl bg-white shadow-2xl px-5 py-3.5 border border-gray-100">
+          <div className="text-[11px] text-gray-500">Same system, any local business</div>
+          <div className="text-sm font-black text-gray-900">Website + SEO + AI automation</div>
+        </div>
       </div>
-      <ul className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-3">
-        {otherIndustries.map(x => (
-          <li key={x.name} className="flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
-            <x.icon className="w-5 h-5 text-lime-700 shrink-0" />
-            <span className="text-sm font-semibold text-gray-800">{x.name}</span>
-          </li>
-        ))}
-      </ul>
+      <div className="lg:col-span-7">
+        <p className="text-xs font-bold uppercase tracking-widest text-lime-700 mb-3">More industries</p>
+        <h2 className="text-3xl lg:text-4xl font-black tracking-tight mb-4">We also help other local businesses grow</h2>
+        <p className="text-gray-600 leading-relaxed mb-6">
+          If your customers search for you on Google, our mix of website design, local SEO, Google Business
+          Profile optimization and AI automation will work for you too.
+        </p>
+        <ul className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          {otherIndustries.map(x => (
+            <li key={x.name} className="flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3.5">
+              <x.icon className="w-5 h-5 text-lime-700 shrink-0" />
+              <span className="text-sm font-semibold text-gray-800">{x.name}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   </section>
 );
@@ -1235,12 +1369,16 @@ const OtherIndustries = () => (
 // ─── FAQ (mirrors the FAQPage JSON-LD in index.html — keep both in sync) ───────
 const faqs = [
   {
-    q: "How long does SEO take for a law firm?",
-    a: "Most law firms see early movement in Google Maps and local rankings within the first 2–3 months, especially after a Google Business Profile is fully optimized. Competitive practice areas in large cities, like personal injury in Toronto or Los Angeles, usually take 6–12 months of consistent work to reach the top positions.",
+    q: "How long does SEO take to bring in new clients?",
+    a: "Most local businesses see early movement in Google Maps and local rankings within the first 2–3 months, especially after a Google Business Profile is fully optimized. Competitive markets in large cities, like personal injury law in Toronto or house extensions in London, usually take 6–12 months of consistent work to reach the top positions.",
   },
   {
-    q: "Do you work with law firms in both Canada and the USA?",
-    a: "Yes. We work remotely with law firms, lawyers, attorneys and licensed paralegals across Canada and the United States, and build local SEO campaigns around the specific cities you want to win clients in.",
+    q: "Do you only work with law firms?",
+    a: "No. Law firms and paralegals are our specialty, and we also work with construction and renovation companies, clinics and healthcare practices, and other local service businesses. Our recent clients include Bridge Legal Services, a paralegal firm in Ontario, and ARZ Construction Ltd, a renovation company in South London.",
+  },
+  {
+    q: "Which countries do you work in?",
+    a: "We work remotely with businesses across Canada, the United States and the United Kingdom, and build local SEO campaigns around the specific cities and neighbourhoods you want to win clients in.",
   },
   {
     q: "Is your marketing compliant with law society and bar advertising rules?",
@@ -1251,8 +1389,8 @@ const faqs = [
     a: "No. Your AI intake assistant gives general information about your firm, collects the details of the enquiry, qualifies the lead and books a consultation. It is set up to make clear that it does not provide legal advice and to hand complex questions to your team.",
   },
   {
-    q: "What is AI search visibility, and why does it matter for lawyers?",
-    a: "More people now ask ChatGPT, Google AI Overviews, Gemini or Perplexity to recommend a lawyer. AI search visibility (also called GEO or AEO) means structuring your website, reviews and online profiles so these tools understand your firm and are more likely to mention you.",
+    q: "What is AI search visibility, and why does it matter?",
+    a: "More people now ask ChatGPT, Google AI Overviews, Gemini or Perplexity to recommend a lawyer, builder or clinic. AI search visibility (also called GEO or AEO) means structuring your website, reviews and online profiles so these tools understand your business and are more likely to mention you.",
   },
   {
     q: "Do I have to sign a long-term contract?",
@@ -1265,7 +1403,7 @@ const FAQ = () => {
   return (
     <section id="faq" className="py-24 text-white" style={{ background: DARK }}>
       <div className="max-w-3xl mx-auto px-6">
-        <SectionHeading dark eyebrow="FAQ" title="Questions law firms ask us" />
+        <SectionHeading dark eyebrow="FAQ" title="Questions clients ask us" />
         <div className="space-y-3">
           {faqs.map((f, i) => {
             const isOpen = open === i;
@@ -1367,7 +1505,7 @@ const Pricing = () => {
 
 // ─── Contact Form ───────────────────────────────────────────────────────────────
 const SERVICE_OPTIONS = [
-  "Full law firm growth package",
+  "Full growth package",
   "Website Design & Development",
   "SEO & AI Search Visibility",
   "Local SEO & Google Business Profile",
@@ -1444,7 +1582,7 @@ const ContactForm = () => {
         </div>
         <div>
           <label htmlFor="f-email" className={labelCls}>Email *</label>
-          <input id="f-email" type="email" required autoComplete="email" value={formData.email} onChange={set("email")} placeholder="jane@yourfirm.com" className={inputCls} />
+          <input id="f-email" type="email" required autoComplete="email" value={formData.email} onChange={set("email")} placeholder="jane@yourbusiness.com" className={inputCls} />
         </div>
       </div>
 
@@ -1455,13 +1593,13 @@ const ContactForm = () => {
         </div>
         <div>
           <label htmlFor="f-firm" className={labelCls}>Firm / business name</label>
-          <input id="f-firm" type="text" autoComplete="organization" value={formData.firm} onChange={set("firm")} placeholder="Smith Law Professional Corp." className={inputCls} />
+          <input id="f-firm" type="text" autoComplete="organization" value={formData.firm} onChange={set("firm")} placeholder="Smith Law / Smith Builders Ltd" className={inputCls} />
         </div>
       </div>
 
       <div>
         <label htmlFor="f-website" className={labelCls}>Current website</label>
-        <input id="f-website" type="text" inputMode="url" value={formData.website} onChange={set("website")} placeholder="yourfirm.com" className={inputCls} />
+        <input id="f-website" type="text" inputMode="url" value={formData.website} onChange={set("website")} placeholder="yourbusiness.com" className={inputCls} />
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -1469,7 +1607,7 @@ const ContactForm = () => {
           <label htmlFor="f-type" className={labelCls}>Business type</label>
           <div className="relative">
             <select id="f-type" value={formData.businessType} onChange={set("businessType")} className={`${inputCls} appearance-none pr-10 cursor-pointer`}>
-              {["Law firm", "Solo lawyer / attorney", "Paralegal practice", "Other business"].map(o => <option key={o}>{o}</option>)}
+              {["Law firm", "Paralegal practice", "Construction / renovation", "Clinic / healthcare", "Other business"].map(o => <option key={o}>{o}</option>)}
             </select>
             <ChevronDown className="w-4 h-4 text-gray-400 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none" />
           </div>
@@ -1488,7 +1626,7 @@ const ContactForm = () => {
       <div>
         <label htmlFor="f-msg" className={labelCls}>Your goals</label>
         <textarea id="f-msg" rows={4} value={formData.message} onChange={set("message")}
-          placeholder="e.g. More personal injury clients in Toronto, rank in Google Maps, stop missing after-hours enquiries..."
+          placeholder="e.g. More clients in Toronto, more quote requests in South London, rank in Google Maps, stop missing after-hours enquiries..."
           className={`${inputCls} resize-none`} />
       </div>
 
@@ -1509,7 +1647,7 @@ const ContactSection = () => (
     <div className="relative max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
       <div className="lg:col-span-5">
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight mb-5">
-          Ready to get <span style={{ color:LIME }}>more clients</span> for your firm?
+          Ready to get <span style={{ color:LIME }}>more clients</span> for your business?
         </h2>
         <p className="text-gray-400 leading-relaxed mb-8 max-w-sm">
           Request a free, no-obligation growth audit. We'll review your website, Google rankings and
@@ -1518,7 +1656,7 @@ const ContactSection = () => (
         <ul className="space-y-4 mb-8">
           {[
             "Free website, SEO & Google Business Profile audit",
-            "Competitor comparison for your city and practice area",
+            "Competitor comparison for your city and industry",
             "Clear plan and fixed quote, with no pressure",
           ].map(t => (
             <li key={t} className="flex items-center gap-3">
@@ -1545,8 +1683,8 @@ const Footer = () => (
       <div className="lg:col-span-2">
         <div className="mb-4"><Logo /></div>
         <p className="text-sm leading-relaxed max-w-sm">
-          {BRAND} is a law firm marketing and AI automation agency. Digital growth, search visibility and
-          intelligent business automation for law firms and local businesses across Canada and the USA.
+          {BRAND} is a digital growth agency. Website design, search visibility and intelligent business
+          automation for law firms, construction companies, clinics and local businesses across Canada, the USA and the UK.
         </p>
       </div>
       <div>
@@ -1589,12 +1727,13 @@ export default function App() {
       <main>
         <Hero />
         <Marquee />
+        <Industries />
         <LawFirmProblem />
         <Services />
         <Showcase />
         <PracticeAreas />
         <ChatbotSection />
-        <CaseStudy />
+        <ClientsSection />
         <PhotoCta />
         <ProcessTimeline />
         <Locations />
