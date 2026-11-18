@@ -7,6 +7,10 @@ import { fileURLToPath } from "node:url";
 
 const SITE = "https://www.neexoraai.com";
 const WA = "https://wa.me/923069829158";
+const PHONE = "(416) 876-4305";
+const TEL = "tel:+14168764305";
+const ADDR = { street: "2428 Islington Ave., Suite 207", city: "Etobicoke", region: "ON", postal: "M9W 3X8", country: "CA" };
+const ADDR_TEXT = `${ADDR.street}, ${ADDR.city}, ${ADDR.region} ${ADDR.postal}`;
 const root = join(dirname(fileURLToPath(import.meta.url)), "..", "public");
 const today = new Date().toISOString().slice(0, 10);
 
@@ -129,8 +133,8 @@ const faqFor = (c) => [
     `Most local businesses see early movement in Google Maps and local results within 2 to 3 months once the Google Business Profile and local pages are in place. Competitive searches in the GTA usually take 6 to 12 months of steady work. We do not promise a specific position, because nobody can.`,
   ],
   [
-    `Do you have an office in ${c.name}?`,
-    `No. Nexora AI works remotely with businesses across Canada, the USA and the UK. We build ${c.name}-focused pages, Google Business Profile optimization and tracking for your business, based on your real service area.`,
+    `Where is Nexora AI based?`,
+    `Our Ontario office is at ${ADDR_TEXT}, and you can call us on ${PHONE}. We meet ${c.name} clients in person or online, and also work with businesses across Canada, the USA and the UK.`,
   ],
   [
     `What does SEO for a ${c.name} business include?`,
@@ -151,6 +155,8 @@ const page = ({ slug, title, h1, desc, body, faq, areaName, areaType, article = 
       "@id": `${SITE}/#organization`,
       name: "Nexora AI",
       url: `${SITE}/`,
+      telephone: "+1-416-876-4305",
+      address: { "@type": "PostalAddress", streetAddress: ADDR.street, addressLocality: ADDR.city, addressRegion: ADDR.region, postalCode: ADDR.postal, addressCountry: ADDR.country },
     },
     article
       ? {
@@ -217,11 +223,12 @@ ${ld.map((o) => `<script type="application/ld+json">${JSON.stringify(o)}</script
 ${body}
 ${faqHtml}
 </main>
-<footer><p>Nexora AI is a digital marketing agency working remotely with businesses in Canada, the USA and the UK.</p>
+<footer><p>Nexora AI is a digital marketing agency for businesses in Canada, the USA and the UK.</p>
+<p>${ADDR_TEXT} · <a href="${TEL}">${PHONE}</a></p>
 <p>Ontario: ${cities.map((c) => `<a href="/${c.slug}/">${c.name}</a>`).join(" · ")} · <a href="/ontario/">All of Ontario</a></p></footer></body></html>`;
 };
 
-const cta = `<p><a class="cta" href="/#pricing">Get a free SEO audit</a><a class="cta alt" href="${WA}">Message us on WhatsApp</a></p>`;
+const cta = `<p><a class="cta" href="/#pricing">Get a free SEO audit</a><a class="cta alt" href="${TEL}">Call ${PHONE}</a><a class="cta alt" href="${WA}">Message us on WhatsApp</a></p>`;
 const write = (slug, html) => {
   mkdirSync(join(root, slug), { recursive: true });
   writeFileSync(join(root, slug, "index.html"), html);
@@ -246,7 +253,7 @@ for (const c of cities) {
 <h2>Nearby areas</h2><p>We also work with businesses in ${L.nearby
     .map((s) => `<a href="/${s}/">${nameOf(s)}</a>`)
     .join(" and ")}, and across <a href="/ontario/">Ontario</a>.</p>
-<div class="card"><strong>Honest expectations.</strong> We work remotely and do not guarantee a number-one ranking, because no agency can. We do the work that earns visibility and measure it against real enquiries.</div>${cta}`;
+<div class="card"><strong>Honest expectations.</strong> We are based in Etobicoke and do not guarantee a number-one ranking, because no agency can. We do the work that earns visibility and measure it against real enquiries.</div>${cta}`;
   write(
     c.slug,
     page({
@@ -270,7 +277,7 @@ const ontarioBody = `<h1>SEO & Digital Marketing in Ontario</h1>
 <h2>Cities we focus on</h2><ul>${cities
   .map((c) => `<li><a href="/${c.slug}/"><strong>${c.name}</strong></a>: local SEO for ${c.areas.slice(0, 3).join(", ")} and more.</li>`)
   .join("")}</ul>
-<h2>What we do</h2><p>Local SEO, Google Business Profile optimization, website design, AI search visibility and lead tracking, managed by one team. We work remotely and build each campaign around the cities and neighbourhoods where you want more customers.</p>
+<h2>What we do</h2><p>Local SEO, Google Business Profile optimization, website design, AI search visibility and lead tracking, managed by one team. From our Etobicoke office we build each campaign around the cities and neighbourhoods where you want more customers.</p>
 <h2>How local search works across the GTA</h2><p>Google decides who appears in the map results using three things: how relevant your business is to the search, how close you are to the searcher, and how prominent you are (reviews, links and mentions across the web). Distance is the one you cannot change, which is why a business in Etobicoke rarely tops the map for Scarborough. What you can change is relevance and prominence, and that is where the work goes.</p>
 <p>For most Ontario businesses that means a complete Google Business Profile with the right primary category, consistent name, address and phone number on every directory, steady reviews from real customers, and a website with a dedicated page for each service and each area you genuinely serve. On top of that, AI search tools such as Google AI Overviews and ChatGPT increasingly answer local questions directly, and they draw on the same clear, well-structured information.</p>
 <h2>What a first month usually looks like</h2><ol>

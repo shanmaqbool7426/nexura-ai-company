@@ -27,6 +27,9 @@ const CARD = "#111118";
 const BRAND = "Nexora AI";
 const WHATSAPP_NUMBER = "923069829158";
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}`;
+const PHONE = "(416) 876-4305";
+const PHONE_HREF = "tel:+14168764305";
+const ADDRESS = "2428 Islington Ave., Suite 207, Etobicoke, ON M9W 3X8";
 
 // Stripe configuration is loaded from .env (variables must be prefixed with VITE_).
 const STRIPE_PAYMENT_LINK = import.meta.env.VITE_STRIPE_PAYMENT_LINK || "#contact";
@@ -1669,9 +1672,15 @@ const ContactSection = () => (
             </li>
           ))}
         </ul>
+        <a href={PHONE_HREF} className="flex items-center gap-2 text-sm font-semibold text-gray-300 hover:text-white mb-3">
+          <Phone className="w-4 h-4" style={{ color: LIME }} /> Call {PHONE}
+        </a>
         <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-semibold text-gray-300 hover:text-white">
           <MessageSquare className="w-4 h-4" style={{ color: LIME }} /> Prefer to chat? Message us on WhatsApp
         </a>
+        <p className="flex items-start gap-2 text-sm text-gray-400 mt-3">
+          <MapPin className="w-4 h-4 mt-0.5 shrink-0" style={{ color: LIME }} /> {ADDRESS}
+        </p>
       </div>
       <div className="lg:col-span-7">
         <ContactForm />
@@ -1711,6 +1720,8 @@ const Footer = () => (
           SEO, AI search visibility, local SEO, AI automation and chatbots, measured against your revenue.
         </p>
         <p className="text-xs text-gray-500 mb-4">Serving Toronto, Vancouver, Calgary, Montreal, New York, Los Angeles, Chicago, London, Manchester and beyond.</p>
+        <address className="not-italic text-sm text-gray-400 mb-3">{ADDRESS}</address>
+        <a href={PHONE_HREF} className="block text-sm font-semibold text-gray-300 hover:text-white mb-3">{PHONE}</a>
         <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-semibold text-gray-300 hover:text-white">
           <WhatsappIcon className="w-4 h-4" /> Message us on WhatsApp
         </a>
