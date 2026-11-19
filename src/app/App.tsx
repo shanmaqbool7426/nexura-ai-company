@@ -379,7 +379,7 @@ const Hero = () => (
       background:"radial-gradient(circle, rgba(185,255,41,.14) 0%, transparent 60%)", filter:"blur(40px)",
     }} />
 
-    <div className="max-w-7xl mx-auto px-6 py-20 w-full flex flex-col lg:flex-row items-center gap-16 lg:gap-12">
+    <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 w-full flex flex-col lg:flex-row items-center gap-16 lg:gap-12">
       <motion.div className="flex-1 max-w-2xl"
         initial={{ opacity:0, y:32 }} animate={{ opacity:1, y:0 }} transition={{ duration:.7 }}>
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border mb-6 text-xs font-semibold tracking-wide"
